@@ -45,10 +45,17 @@
             handler(nil, [NSString stringWithFormat:@"%@", error]);
         } else {
             VNBarcodeObservation *result = request.results.firstObject;
-            handler(@{
-                      @"format": [self convertSymbolToFormat:result.symbology],
-                      @"content": result.payloadStringValue
-                      }, nil);
+            NSString *barcode = result.payloadStringValue;
+            if(barcode != nil) {
+                handler(@{
+                          @"format": [self convertSymbolToFormat:result.symbology],
+                          @"content": result.payloadStringValue
+                          }, nil);
+                return;
+            } else {
+                handler(nil, @"Not Found");
+                return;
+            }
         }
     }];
     if (_symbols.count != 0) {
