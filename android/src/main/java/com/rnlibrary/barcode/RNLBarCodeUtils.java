@@ -49,36 +49,21 @@ public final class RNLBarCodeUtils {
 
     @Nullable
     public static Bitmap parseImageStr(String str) throws Exception {
-        if (str.startsWith("/")) {
-            str = "file://" + str;
-        }
-
-        Bitmap image;
-
-        if (str.startsWith("file") || str.startsWith("http")) {
-            InputStream iStream = null;
-            try {
-                if (str.startsWith("file")) {
-                    iStream = new FileInputStream(str);
-                } else if (str.startsWith("http")) {
-                    URL url = new URL(str);
-                    URLConnection connection = url.openConnection();
-                    connection.connect();
-                    iStream = connection.getInputStream();
-                }
-                image = BitmapFactory.decodeStream(iStream);
-            } finally {
-                if (iStream != null) {
-                    iStream.close();
-                }
+        Bitmap image = null;
+        try {
+            FileInputStream in;
+            BufferedInputStream buf;
+            in = new FileInputStream(str);
+            buf = new BufferedInputStream(in);
+            image = BitmapFactory.decodeStream(buf);
+            if (in != null) {
+                in.close();
             }
-        } else {
-            // maybe base64 encoding string
-            if (str.startsWith("data:")) {
-                str = str.substring(str.indexOf(",") + 1);
+            if (buf != null) {
+                buf.close();
             }
-            byte[] bytes = Base64.decode(str, Base64.DEFAULT);
-            image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return image;
