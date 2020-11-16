@@ -11,6 +11,8 @@ import com.rnlibrary.barcode.decoder.Decoder;
 import com.rnlibrary.barcode.decoder.ZBarDecoder;
 import com.rnlibrary.barcode.decoder.ZXingDecoder;
 
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -49,6 +51,7 @@ public final class RNLBarCodeUtils {
 
     @Nullable
     public static Bitmap parseImageStr(String str) throws Exception {
+
         Bitmap image = null;
         try {
             FileInputStream in;
