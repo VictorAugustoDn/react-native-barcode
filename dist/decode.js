@@ -5,7 +5,7 @@ export var Decoder;
 (function (Decoder) {
     Decoder[Decoder["Auto"] = 0] = "Auto";
     Decoder[Decoder["ZXing"] = 1] = "ZXing";
-    Decoder[Decoder["ZBar"] = 2] = "ZBar";
+    Decoder[Decoder["GVision"] = 2] = "GVision";
     Decoder[Decoder["Vision"] = 3] = "Vision";
     Decoder[Decoder["AVFoundation"] = 4] = "AVFoundation";
 })(Decoder || (Decoder = {}));

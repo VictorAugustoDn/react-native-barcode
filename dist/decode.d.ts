@@ -1,7 +1,7 @@
 export declare enum Decoder {
     Auto = 0,
     ZXing = 1,
-    ZBar = 2,
+    GVision = 2,
     Vision = 3,
     AVFoundation = 4
 }
