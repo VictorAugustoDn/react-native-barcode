@@ -9,6 +9,7 @@ import androidx.annotation.WorkerThread;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.PermissionAwareActivity;
@@ -26,7 +27,7 @@ import com.otaliastudios.cameraview.Gesture;
 import com.otaliastudios.cameraview.GestureAction;
 import com.otaliastudios.cameraview.Size;
 import com.rnlibrary.barcode.decoder.Decoder;
-import com.rnlibrary.barcode.decoder.ZBarDecoder;
+import com.rnlibrary.barcode.decoder.GVisionDecoder;
 import com.rnlibrary.barcode.decoder.ZXingDecoder;
 
 public class RNLBarCodeScannerView extends CameraView implements LifecycleEventListener, PermissionListener {
@@ -175,7 +176,7 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
                 if (this.decoder != null) {
                     this.decoder.release();
                 }
-                this.decoder = new ZBarDecoder();
+                this.decoder = new GVisionDecoder((ReactApplicationContext) mContext.getApplicationContext());
                 setFormats(this.formats);
             }
         } else if (decoderID == 1 && this.decoderID != 1) {

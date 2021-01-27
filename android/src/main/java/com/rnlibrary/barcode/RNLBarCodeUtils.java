@@ -4,29 +4,27 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.util.Base64;
 import android.view.View;
 
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ThemedReactContext;
 import com.rnlibrary.barcode.decoder.Decoder;
-import com.rnlibrary.barcode.decoder.ZBarDecoder;
+import com.rnlibrary.barcode.decoder.GVisionDecoder;
 import com.rnlibrary.barcode.decoder.ZXingDecoder;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 
 import javax.annotation.Nullable;
 
 public final class RNLBarCodeUtils {
+
     @Nullable
-    public static Decoder getDecoderByID(int id) {
+    public static Decoder getDecoderByID(int id, ReactApplicationContext context) {
         Decoder decoder = null;
         if (id == 2 || id == 0) {
             // ZBar Auto
-            decoder = new ZBarDecoder();
+            decoder = new GVisionDecoder(context);
         } else if (id == 1) {
             // ZXing
             decoder = new ZXingDecoder();

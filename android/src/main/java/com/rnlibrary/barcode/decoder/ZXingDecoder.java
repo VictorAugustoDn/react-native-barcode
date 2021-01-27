@@ -13,8 +13,10 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.RGBLuminanceSource;
+import com.google.zxing.Reader;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.oned.ITFReader;
 import com.rnlibrary.barcode.RNLBarCodeUtils;
 
 import java.util.ArrayList;
@@ -67,11 +69,14 @@ public class ZXingDecoder implements Decoder {
         BinaryBitmap bBitmap = new BinaryBitmap(new HybridBinarizer(source));
         WritableMap result = null;
         try {
+            Reader reader = new ITFReader();
+            reader.reset();
+            Result barcode = reader.decode(bBitmap);
             Result decodeResult = mReader.decode(bBitmap, mHints);
             result = Arguments.createMap();
             result.putInt("format", symbolToFormat(decodeResult.getBarcodeFormat()));
-            result.putString("content", decodeResult.getText());
-        } catch (NotFoundException ignored) {
+            result.putString("content", barcode.getText());
+        } catch (Exception e) {
         }
         return result;
     }

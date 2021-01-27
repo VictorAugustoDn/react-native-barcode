@@ -11,9 +11,11 @@ import com.rnlibrary.barcode.decoder.Decoder;
 
 public class RNLBarCodeModule extends ReactContextBaseJavaModule {
     private static final String ModuleName = "RNLBarCode";
+    private final ReactApplicationContext reactContext;
 
     RNLBarCodeModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        this.reactContext = reactContext;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class RNLBarCodeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void decode(ReadableMap option, final Promise promise) {
         int decoderID = option.getInt("decoder");
-        Decoder decoder = RNLBarCodeUtils.getDecoderByID(decoderID);
+        Decoder decoder = RNLBarCodeUtils.getDecoderByID(decoderID, this.reactContext);
         if (decoder == null) {
             promise.reject(RNLBarCodeError.InvokeFailed.toString(),
                     "Device doesn't support this decoder");
