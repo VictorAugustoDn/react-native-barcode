@@ -13,12 +13,7 @@
         // Auto
         if (@available(iOS VN_AVAILABLE_VERSION, *)) {
             decoder = [RNLBarCodeDecoderVN new];
-        } else {
-            decoder = [RNLBarCodeDecoderZBar new];
         }
-    } else if ([decoderID isEqualToNumber:@2]) {
-        // ZBar
-        decoder = [RNLBarCodeDecoderZBar new];
     } else if ([decoderID isEqualToNumber:@3]) {
         // Vision
         if (@available(iOS VN_AVAILABLE_VERSION, *)) {
