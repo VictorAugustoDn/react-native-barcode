@@ -16,5 +16,4 @@ Pod::Spec.new do |s|
   s.dependency 'React'
   s.dependency 'React-Core'
   s.dependency 'ReactCommon'
-  s.dependency 'ZBarSDK', '~> 1.3'
 end
