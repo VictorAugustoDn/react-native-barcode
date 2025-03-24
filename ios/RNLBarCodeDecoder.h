@@ -41,13 +41,6 @@ __IOS_AVAILABLE(VN_AVAILABLE_VERSION)
 
 @end
 
-/**
- * ZBar decoder wrapper
- */
-@interface RNLBarCodeDecoderZBar : NSObject<RNLBarCodeStillImageDecoder>
-
-@end
-
 typedef void (^RNLBarCodeAVCallback)(RNLBarCodeDecodeResult _Nonnull result);
 
 /**
